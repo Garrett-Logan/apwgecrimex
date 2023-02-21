@@ -13,9 +13,8 @@
 # either express or implied. See the License for the specific language governing permissions
 # and limitations under the License.
 
-import datetime
 import json
-from datetime import timedelta
+from datetime import datetime, timedelta
 from urllib.parse import urlparse
 
 # Phantom App imports
@@ -137,12 +136,8 @@ class ApwgEcrimeExchangeConnector(BaseConnector):
         return RetVal(action_result.set_status(phantom.APP_ERROR, message), None)
 
     def get_epoch_time(self):
-        # Gets the date a week ago
-        date = datetime.today() - timedelta(days=30)
-
-        # coverts to epoch time
-        date = date.timestamp()
-        date = int(date)
+        # Gets the date a month ago in epoch time
+        date = int((datetime.now() - timedelta(days=30)).timestamp())
 
         return date
 
